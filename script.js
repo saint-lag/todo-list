@@ -1,7 +1,9 @@
-// Create item
 const createButton = document.getElementById('criar-tarefa');
 const itemList = document.getElementById('lista-tarefas');
 const item = document.createElement('li');
+
+// Session Initiated: Whether browser has visit before
+// Saved Items: Variable that receives Saved Local Storage Items
 
 if (
   localStorage.sessionInitiated === 'true' &&
@@ -20,14 +22,19 @@ if (
   var savedItems = [];
 }
 
+// Create Button: Creates Elements of List
+
 createButton.addEventListener('click', function () {
   item.style.listStyle = 'none';
   item.style.lineHeight = '20px';
   item.className = 'item';
   item.innerText = document.getElementById('texto-tarefa').value;
   itemList.appendChild(item.cloneNode(true));
-  savedItems.push(item);
-  console.log('Item Saved: ' + item.innerText);
 
+  // Saving Items to LocalStorage
+  savedItems.push(item.innerText);
+  console.log(savedItems);
+  console.log('Item Saved: ' + item.innerText);
   localStorage.savedItems = savedItems;
+  console.log(localStorage.savedItems);
 });
