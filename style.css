@@ -1,0 +1,82 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+
+:root {
+
+  --background-color-default-primary: rgb(70 , 68 , 167);
+
+  --background-color-defaulf-secundary: rgb(196 , 202 , 253);
+
+  --font-color-default: rgb(17 , 6 , 78);
+
+  --main-box-width: 800px;
+}
+
+body {
+  position: absolute;
+  margin-top: 25%;
+  background-color: var(--background-color-default-primary);
+  text-align: center;
+  justify-content: center;
+}
+
+
+header {
+  color: var(--font-color-default);
+  background-color: var(--background-color-defaulf-secundary);
+  display: inline-block;
+  position: relative;
+  width: var(--main-box-width);
+  height: 8vh;
+  padding-top: 4vh;
+}
+
+main {
+  display: inline-block;
+  width: var(--main-box-width);
+  position: relative;
+  padding-top: 2vh;
+  padding-bottom: 2vh;
+  background: var(--background-color-defaulf-secundary);
+
+}
+
+footer {
+  display: inline-block;
+  width: var(--main-box-width);
+  color: var(--font-color-default);
+  background: var(--background-color-defaulf-secundary);
+  text-align: center;
+  height: 8vh;
+}
+
+footer h4 {
+  padding: 4vh;
+}
+
+#texto-tarefa {
+  text-align: center;
+  width: 150px;
+}
+
+#criar-tarefa {
+  background: green;
+  color: var(--background-color-defaulf-secundary);
+}
+
+#remover-finalizados {
+  background: orangered;
+  color: var(--background-color-defaulf-secundary);
+}
+
+#apaga-tudo {
+  background: red;
+  color: var(--background-color-defaulf-secundary);
+}
+
+#tema {
+  background: var(--background-color-default-primary);
+  color: var(--background-color-defaulf-secundary);
+}
