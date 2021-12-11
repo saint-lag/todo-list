@@ -11,8 +11,13 @@ if (
 ) {
   console.log('Session: TRUE');
   var savedItems = JSON.parse(localStorage.savedItems);
+  console.log(savedItems);
   for (let savedItem of savedItems) {
-    itemList.appendChild(savedItem);
+    item.style.listStyle = 'none';
+    item.style.lineHeight = '20px';
+    item.className = 'item';
+    item.innerText = savedItem;
+    itemList.appendChild(item.cloneNode(true));
     console.log('Saved Item: ' + itemList);
   }
 } else {
@@ -33,8 +38,22 @@ createButton.addEventListener('click', function () {
 
   // Saving Items to LocalStorage
   savedItems.push(item.innerText);
+  let tempList = JSON.stringify(savedItems);
   console.log(savedItems);
   console.log('Item Saved: ' + item.innerText);
-  localStorage.savedItems = savedItems;
+  localStorage.savedItems = tempList;
   console.log(localStorage.savedItems);
+});
+
+// Removes Tasks
+
+// Clear All
+
+const clearButton = document.getElementById('apaga-tudo');
+
+clearButton.addEventListener('click', function () {
+  while (itemList.firstChild) {
+    itemList.removeChild(itemList.firstChild);
+    localStorage.savedItems = '[]';
+  }
 });
