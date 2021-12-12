@@ -6,6 +6,8 @@ const inputTask = document.getElementById('texto-tarefa');
 const taskList = document.getElementById('lista-tarefas');
 // Locate: Botão apaga tudo
 const apagaTudoButton = document.getElementById('apaga-tudo');
+// Location: Botão apaga finalizados
+const apagaFinalizafosButton = document.getElementById('remover-finalizados');
 
 // Pega o valor do input e adiciona à lista ao clicar no botão para adicinar uma nova tarefa
 createTaskButton.addEventListener ('click', function () {
@@ -32,8 +34,6 @@ taskList.addEventListener ('click', (element) => {
         element.target.style.backgroundColor = "rgb(128, 128, 128)";
         element.target.classList.add('selected');
     }      
-        
-    
 });
 
 // Risca o item da lista ou tira o risco se já estiver riscada
@@ -44,4 +44,13 @@ taskList.addEventListener ('dblclick', function (element) {
 // Remove todos os elementos da lista
 apagaTudoButton.addEventListener('click', function () {
     taskList.innerHTML = '';
+});
+
+// Remove itens finalizados/riscados
+apagaFinalizafosButton.addEventListener('click', function () {
+    let completeds = document.getElementsByClassName('completed');
+    let completedsLength = completeds.length;
+    for (let index = 0; index < completedsLength; index++) {
+        taskList.removeChild(completeds[0]);
+    }
 });
