@@ -4,6 +4,8 @@ const createTaskButton = document.getElementById('criar-tarefa');
 const inputTask = document.getElementById('texto-tarefa');
 // Locate: lista de tarefas
 const taskList = document.getElementById('lista-tarefas');
+// Locate: Botão apaga tudo
+const apagaTudoButton = document.getElementById('apaga-tudo');
 
 // Pega o valor do input e adiciona à lista ao clicar no botão para adicinar uma nova tarefa
 createTaskButton.addEventListener ('click', function () {
@@ -37,4 +39,9 @@ taskList.addEventListener ('click', (element) => {
 // Risca o item da lista ou tira o risco se já estiver riscada
 taskList.addEventListener ('dblclick', function (element) {
     element.target.classList.toggle('completed');
+});
+
+// Remove todos os elementos da lista
+apagaTudoButton.addEventListener('click', function () {
+    taskList.innerHTML = '';
 });
