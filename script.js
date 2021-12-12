@@ -15,5 +15,10 @@ createTaskButton.addEventListener ('click', function () {
     console.log(valueInputTask);
 });
 
-
+taskList.addEventListener ('click', function (element){
+    if (element.target.tagName === "LI") {
+        element.target.style.backgroundColor = "rgb(128, 128, 128)";
+        console.log(element.target)
+    }
+});
 
