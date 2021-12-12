@@ -14,23 +14,27 @@ createTaskButton.addEventListener ('click', function () {
     taskList.appendChild(li);
 });
 
-// Define com a cor cinza do background color do item da lista ao clicar
-taskList.addEventListener ('click', function (element){
+// Define o background-color do item da lista como cinza ao clicar
+taskList.addEventListener ('click', (element) => {
+ 
     let taskListChilden = document.getElementById('lista-tarefas').children;
     if (element.target.tagName === "LI") {
-        // console.log(taskListChilden)
         for (let index = 0; index < taskListChilden.length; index++) {
             let listItem = taskListChilden[index];
             if (listItem.classList.contains('selected')) {
-                console.log(listItem);
                 listItem.style.removeProperty("background-color");
                 listItem.classList.remove('selected');
             }
         }
-
+        
         element.target.style.backgroundColor = "rgb(128, 128, 128)";
         element.target.classList.add('selected');
-        // console.log(element.target)
-    }
+    }      
+        
+    
 });
 
+// Risca o item da lista ou tira o risco se já estiver riscada
+taskList.addEventListener ('dblclick', function (element) {
+    element.target.classList.toggle('completed');
+});
