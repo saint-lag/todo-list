@@ -12,13 +12,25 @@ createTaskButton.addEventListener ('click', function () {
     let li = document.createElement('li');
     li.innerText = valueInputTask;
     taskList.appendChild(li);
-    console.log(valueInputTask);
 });
 
+// Define com a cor cinza do background color do item da lista ao clicar
 taskList.addEventListener ('click', function (element){
+    let taskListChilden = document.getElementById('lista-tarefas').children;
     if (element.target.tagName === "LI") {
+        // console.log(taskListChilden)
+        for (let index = 0; index < taskListChilden.length; index++) {
+            let listItem = taskListChilden[index];
+            if (listItem.classList.contains('selected')) {
+                console.log(listItem);
+                listItem.style.removeProperty("background-color");
+                listItem.classList.remove('selected');
+            }
+        }
+
         element.target.style.backgroundColor = "rgb(128, 128, 128)";
-        console.log(element.target)
+        element.target.classList.add('selected');
+        // console.log(element.target)
     }
 });
 
