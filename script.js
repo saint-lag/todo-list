@@ -23,14 +23,10 @@ taskList.addEventListener ('click', (element) => {
  
     let taskListChilden = document.getElementById('lista-tarefas').children;
     if (element.target.tagName === "LI") {
-        for (let index = 0; index < taskListChilden.length; index++) {
-            let listItem = taskListChilden[index];
-            if (listItem.classList.contains('selected')) {
-                listItem.style.removeProperty("background-color");
-                listItem.classList.remove('selected');
-            }
+        if (document.querySelector('.selected')) {
+            document.querySelector('.selected').style.removeProperty("background-color");
+            document.querySelector('.selected').classList.remove('selected');
         }
-        
         element.target.style.backgroundColor = "rgb(128, 128, 128)";
         element.target.classList.add('selected');
     }      
