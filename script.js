@@ -29,6 +29,14 @@ createTaskButton.addEventListener ('click', function () {
     taskList.appendChild(li);
 });
 
+// Aciona o botão "Criar tarefa" quando pressionar Enter
+inputTask.addEventListener('keyup', function (event) {
+    if (event.key === 'Enter') {
+        event.preventDefault();
+        createTaskButton.click();
+    }
+});
+
 // Define o background-color do item da lista como cinza ao clicar
 taskList.addEventListener ('click', (element) => {
  
