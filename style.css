@@ -61,9 +61,15 @@ footer {
     position: fixed;
     bottom: 0;
     width: 100%;
+    color: gray;
+
 }
 footer img {
     width: 30px;
+}
+footer a {
+    text-decoration: none;
+    color: gray;
 }
 /* .no-highlight:focus {
     outline: none !important;
