@@ -8,6 +8,8 @@ const taskList = document.getElementById('lista-tarefas');
 const apagaTudoButton = document.getElementById('apaga-tudo');
 // Location: Botão apaga finalizados
 const apagaFinalizafosButton = document.getElementById('remover-finalizados');
+// Location: Botão salva tarefas
+const salvaTarefasButton = document.getElementById('salvar-tarefas');
 
 // Pega o valor do input e adiciona à lista ao clicar no botão para adicinar uma nova tarefa
 createTaskButton.addEventListener ('click', function () {
@@ -41,7 +43,6 @@ taskList.addEventListener ('dblclick', function (element) {
 apagaTudoButton.addEventListener('click', function () {
     taskList.innerHTML = '';
 });
-
 // Remove itens finalizados/riscados
 apagaFinalizafosButton.addEventListener('click', function () {
     let completeds = document.getElementsByClassName('completed');
@@ -50,3 +51,14 @@ apagaFinalizafosButton.addEventListener('click', function () {
         taskList.removeChild(completeds[0]);
     }
 });
+
+// Botão de ação para salvar lista em localStorage
+salvaTarefasButton.addEventListener('click', salvaTarefas);
+// Salva a lista em localStorage
+function salvaTarefas() {
+    let taskLists = taskList.innerHTML;
+    window.localStorage.setItem('myTaskList',JSON.stringify(taskLists));
+}
+// Puxa a lista salva em localStorage e aplica no html
+taskList.innerHTML = JSON.parse(window.localStorage.getItem('myTaskList'));
+
