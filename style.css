@@ -6,6 +6,7 @@ body {
     min-height: 100vh;
     text-align: center;
     margin: 0px;
+    background-color: wheat;
 }
 h1 {
     margin-top: 0px;
@@ -16,14 +17,28 @@ header p {
     margin: 0px;
     padding: 5px;
 }
+.container {
+    max-width: 500px;
+    margin: auto;
+}
+#texto-tarefa {
+    width: calc(100% - 120px);
+    margin-top: 10px;
+}
+.space-button {
+    margin: 6px;
+}
 #lista-tarefas {
     cursor: default;
     border: 1px solid;
+    border-radius: 3px;
     max-width: 500px;
     height: 300px;
     margin: auto;
     overflow-y: scroll;
     text-align: left;
+    background-color: white;
+    
 }
 .completed {
     text-decoration: line-through;
