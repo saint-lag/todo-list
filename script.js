@@ -103,6 +103,7 @@ moverBaixoButton.addEventListener('click', function () {
     }
 });
 
+// Remove elemento selecionado
 removeSelecionadoButton.addEventListener('click', function () {
     let element = document.querySelector('.selected');
     if (element) {
@@ -110,10 +111,11 @@ removeSelecionadoButton.addEventListener('click', function () {
     }
 });
 
-// body.addEventListener('click', function (element) {
-//     if (element.target.tagName !== 'LI') {
-//         if(document.querySelector('.selected')) {
-//             document.querySelector('.selected').classList.remove('selected');
-//         }
-//     }
-// });
+// Ao clicar fora do elemento Li o elemento selecionado perde a seleção
+body.addEventListener('click', function (element) {
+    if (element.target.tagName !== 'LI' && element.target.id !== "mover-cima" && element.target.id !== "mover-baixo") {
+        if(document.querySelector('.selected')) {
+            document.querySelector('.selected').classList.remove('selected');
+        }
+    }
+});
