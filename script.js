@@ -1,4 +1,4 @@
-// Locate: botão que adiciona itens na lista
+// Locate: Botão que adiciona itens na lista
 const createTaskButton = document.getElementById('criar-tarefa');
 // Locate: input de adição de tarefas
 const inputTask = document.getElementById('texto-tarefa');
@@ -14,6 +14,8 @@ const salvaTarefasButton = document.getElementById('salvar-tarefas');
 const moverCimaButton = document.getElementById('mover-cima');
 // Location: Botão de mover item da lista para baixo
 const moverBaixoButton = document.getElementById('mover-baixo');
+// Location: Botão de remover item selecionado
+const removeSelecionadoButton = document.getElementById('remover-selecionado');
 
 // Pega o valor do input e adiciona à lista ao clicar no botão para adicinar uma nova tarefa
 createTaskButton.addEventListener ('click', function () {
@@ -86,5 +88,12 @@ moverBaixoButton.addEventListener('click', function () {
         if (element.nextElementSibling && backgroundColorElementValue === "rgb(128, 128, 128)") {
             element.parentNode.insertBefore(element.nextElementSibling, element);
         }
+    }
+});
+
+removeSelecionadoButton.addEventListener('click', function () {
+    let element = document.querySelector('.selected');
+    if (element) {
+        element.remove();
     }
 });
