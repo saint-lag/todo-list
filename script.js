@@ -103,7 +103,7 @@ moverBaixoButton.addEventListener('click', function () {
     }
 });
 
-// Remove elemento selecionado
+// Remove elemento da lista que estiver selecionado
 removeSelecionadoButton.addEventListener('click', function () {
     let element = document.querySelector('.selected');
     if (element) {
