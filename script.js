@@ -25,6 +25,7 @@ createTaskButton.addEventListener ('click', function () {
     inputTask.value = '';
     let li = document.createElement('li');
     li.innerText = valueInputTask;
+    li.classList.add('no-highlight');
     taskList.appendChild(li);
 });
 
