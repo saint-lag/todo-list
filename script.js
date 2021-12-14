@@ -16,6 +16,8 @@ const moverCimaButton = document.getElementById('mover-cima');
 const moverBaixoButton = document.getElementById('mover-baixo');
 // Location: Botão de remover item selecionado
 const removeSelecionadoButton = document.getElementById('remover-selecionado');
+// Location: body
+const body = document.querySelector('body');
 
 // Pega o valor do input e adiciona à lista ao clicar no botão para adicinar uma nova tarefa
 createTaskButton.addEventListener ('click', function () {
@@ -62,8 +64,9 @@ apagaFinalizafosButton.addEventListener('click', function () {
 // Salva a lista em localStorage
 salvaTarefasButton.addEventListener('click', function () {
     let element = document.querySelector('.selected');
-    element.removeAttribute('style');
-    element.classList.remove('selected');
+    if (element) {
+        element.classList.remove('selected');
+    }
     let taskLists = taskList.innerHTML;
     window.localStorage.setItem('myTaskList',JSON.stringify(taskLists));
 });
@@ -97,3 +100,11 @@ removeSelecionadoButton.addEventListener('click', function () {
         element.remove();
     }
 });
+
+// body.addEventListener('click', function (element) {
+//     if (element.target.tagName !== 'LI') {
+//         if(document.querySelector('.selected')) {
+//             document.querySelector('.selected').classList.remove('selected');
+//         }
+//     }
+// });
