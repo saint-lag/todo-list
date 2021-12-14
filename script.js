@@ -10,6 +10,10 @@ const apagaTudoButton = document.getElementById('apaga-tudo');
 const apagaFinalizafosButton = document.getElementById('remover-finalizados');
 // Location: Botão salva tarefas
 const salvaTarefasButton = document.getElementById('salvar-tarefas');
+// Location: Botão de mover item da lista para cima
+const moverCimaButton = document.getElementById('mover-cima');
+// Location: Botão de mover item da lista para baixo
+const moverBaixoButton = document.getElementById('mover-baixo');
 
 // Pega o valor do input e adiciona à lista ao clicar no botão para adicinar uma nova tarefa
 createTaskButton.addEventListener ('click', function () {
@@ -26,10 +30,10 @@ taskList.addEventListener ('click', (element) => {
     let taskListChilden = document.getElementById('lista-tarefas').children;
     if (element.target.tagName === "LI") {
         if (document.querySelector('.selected')) {
-            document.querySelector('.selected').style.removeProperty("background-color");
+            // document.querySelector('.selected').style.removeProperty("background-color");
             document.querySelector('.selected').classList.remove('selected');
         }
-        element.target.style.backgroundColor = "rgb(128, 128, 128)";
+        // element.target.style.backgroundColor = "rgb(128, 128, 128)";
         element.target.classList.add('selected');
     }      
 });
@@ -53,12 +57,34 @@ apagaFinalizafosButton.addEventListener('click', function () {
 });
 
 // Botão de ação para salvar lista em localStorage
-salvaTarefasButton.addEventListener('click', salvaTarefas);
 // Salva a lista em localStorage
-function salvaTarefas() {
+salvaTarefasButton.addEventListener('click', function () {
+    let element = document.querySelector('.selected');
+    element.removeAttribute('style');
+    element.classList.remove('selected');
     let taskLists = taskList.innerHTML;
     window.localStorage.setItem('myTaskList',JSON.stringify(taskLists));
-}
+});
 // Puxa a lista salva em localStorage e aplica no html
 taskList.innerHTML = JSON.parse(window.localStorage.getItem('myTaskList'));
 
+// Move Elemento selecionado para cima
+moverCimaButton.addEventListener('click', function () {
+    let element = document.querySelector('.selected');
+    if (element) {
+        let backgroundColorElementValue = window.getComputedStyle(element).getPropertyValue('background-color');
+        if (element.previousElementSibling && backgroundColorElementValue === "rgb(128, 128, 128)") {
+            element.parentNode.insertBefore(element, element.previousElementSibling);
+        }
+    }
+});
+// Move elemento selecionado para baixo
+moverBaixoButton.addEventListener('click', function () {
+    let element = document.querySelector('.selected');
+    if (element) {
+        let backgroundColorElementValue = window.getComputedStyle(element).getPropertyValue('background-color');
+        if (element.nextElementSibling && backgroundColorElementValue === "rgb(128, 128, 128)") {
+            element.parentNode.insertBefore(element.nextElementSibling, element);
+        }
+    }
+});
