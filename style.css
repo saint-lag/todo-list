@@ -1,8 +1,15 @@
 #lista-tarefas {
     cursor: default;
+    border: 1px solid;
+    max-width: 500px;
+    height: 300px;
+    margin: auto;
+    overflow-y: scroll;
+    text-align: left;
 }
 body {
     min-height: 100vh;
+    text-align: center;
 }
 .completed {
     text-decoration: line-through;
