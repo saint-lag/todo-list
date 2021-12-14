@@ -83,7 +83,8 @@ salvaTarefasButton.addEventListener('click', function () {
 taskList.innerHTML = JSON.parse(window.localStorage.getItem('myTaskList'));
 
 // Move Elemento selecionado para cima
-moverCimaButton.addEventListener('click', function () {
+moverCimaButton.addEventListener('click', moveUp);
+function moveUp () {
     let element = document.querySelector('.selected');
     if (element) {
         let backgroundColorElementValue = window.getComputedStyle(element).getPropertyValue('background-color');
@@ -91,15 +92,30 @@ moverCimaButton.addEventListener('click', function () {
             element.parentNode.insertBefore(element, element.previousElementSibling);
         }
     }
-});
+}
+
+
 // Move elemento selecionado para baixo
-moverBaixoButton.addEventListener('click', function () {
+moverBaixoButton.addEventListener('click', moveDown);
+function moveDown () {
     let element = document.querySelector('.selected');
     if (element) {
         let backgroundColorElementValue = window.getComputedStyle(element).getPropertyValue('background-color');
         if (element.nextElementSibling && backgroundColorElementValue === "rgb(128, 128, 128)") {
             element.parentNode.insertBefore(element.nextElementSibling, element);
         }
+    }
+};
+
+// Move o elemeto selecionado usando as teclas ArrowUp e ArrowDown
+addEventListener('keydown', function (event) {
+    console.log(event.key);
+    if (event.key === 'ArrowUp') {
+        event.preventDefault();
+        moveUp();
+    } else if (event.key === 'ArrowDown') {
+        event.preventDefault();
+        moveDown();
     }
 });
 
