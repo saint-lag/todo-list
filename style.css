@@ -20,6 +20,7 @@ header p {
 .container {
     max-width: 500px;
     margin: auto;
+    margin-bottom: 100px;
 }
 #texto-tarefa {
     width: calc(100% - 120px);
@@ -38,7 +39,7 @@ header p {
     overflow-y: scroll;
     text-align: left;
     background-color: white;
-    
+    margin: 0px 5px;
 }
 .completed {
     text-decoration: line-through;
@@ -54,6 +55,15 @@ header p {
     -moz-user-select: none;
     -ms-user-select: none;
     user-select: none;
+}
+
+footer {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+}
+footer img {
+    width: 30px;
 }
 /* .no-highlight:focus {
     outline: none !important;
