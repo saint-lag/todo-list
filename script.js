@@ -4,7 +4,7 @@ const item = document.createElement('li');
 
 // Welcome!
 
-if (localStorage.length === 0) {
+if (localStorage.sessionInitiated === 'undefined') {
   console.log('Session Initiated!');
   localStorage.setItem('sessionInitiated', JSON.stringify(true));
   localStorage.setItem('savedItems', JSON.stringify([]));
@@ -30,10 +30,8 @@ if (localStorage.length === 0) {
 
 const saveButton = document.getElementById('salvar-tarefas');
 saveButton.addEventListener('click', function () {
-  if (savedItems.length > 0) {
-    localStorage.savedItems = JSON.stringify(savedItems);
-    console.log('Saved Items: ' + savedItems);
-  }
+  localStorage.savedItems = JSON.stringify(savedItems);
+  console.log('Saved Items: ' + savedItems);
 });
 
 // Create Button: Creates Elements of List
