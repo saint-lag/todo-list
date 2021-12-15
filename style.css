@@ -11,11 +11,12 @@
 
   --font-color-default: rgb(17 , 6 , 78);
 
-  --main-box-width: 800px;
+  --main-box-width: 50%;
 }
 
 body {
   position: absolute;
+  width: 100%;
   margin-top: 25%;
   background-color: var(--background-color-default-primary);
   text-align: center;
@@ -27,7 +28,6 @@ header {
   color: var(--font-color-default);
   background-color: var(--background-color-defaulf-secundary);
   display: inline-block;
-  position: relative;
   width: var(--main-box-width);
   height: 8vh;
   padding-top: 4vh;
@@ -36,7 +36,6 @@ header {
 main {
   display: inline-block;
   width: var(--main-box-width);
-  position: relative;
   padding-top: 2vh;
   padding-bottom: 2vh;
   background: var(--background-color-defaulf-secundary);

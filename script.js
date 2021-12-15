@@ -16,9 +16,10 @@ if (
     item.style.listStyle = 'none';
     item.style.lineHeight = '20px';
     item.className = 'item';
-    item.innerText = savedItem;
+    item.innerText = savedItem.text;
     itemList.appendChild(item.cloneNode(true));
     console.log('Saved Item: ' + itemList);
+    var items = document.querySelectorAll('.item');
   }
 } else {
   console.log('Session: FALSE');
@@ -36,16 +37,61 @@ createButton.addEventListener('click', function () {
   item.innerText = document.getElementById('texto-tarefa').value;
   itemList.appendChild(item.cloneNode(true));
 
-  // Saving Items to LocalStorage
-  savedItems.push(item.innerText);
-  let tempList = JSON.stringify(savedItems);
-  console.log(savedItems);
-  console.log('Item Saved: ' + item.innerText);
-  localStorage.savedItems = tempList;
-  console.log(localStorage.savedItems);
+  items = document.querySelectorAll('.item');
+
+  // Saving Items to LocalStorage --- OBJECT
+  let itemKey = new Object();
+  itemKey.text = item.innerHTML;
+  itemKey.isConcluded = false;
+
+  savedItems.push(itemKey);
+  localStorage.savedItems = JSON.stringify(savedItems);
+  console.log('Saved Items: ' + savedItems);
 });
 
-// Removes Tasks
+// Completed Tasks
+
+let isConcluded = false;
+
+if (document.querySelectorAll('.item') != 'undefined') {
+  document.querySelectorAll('.item').forEach((item) => {
+    item.addEventListener('dblclick', function (event) {
+      if (isConcluded === false) {
+        isConcluded = true;
+        console.log(isConcluded);
+        event.target.className += ' completed';
+        event.target.style.textDecoration = 'line-through';
+      } else {
+        isConcluded = false;
+        console.log(isConcluded);
+        event.target.style.textDecoration = 'none';
+        event.target.classList.remove('completed');
+      }
+    });
+  });
+}
+
+// Remove Concluded Tasks
+
+const completedTasks = document.getElementsByClassName('completed');
+const removeButton = document.getElementById('remover-finalizados');
+
+removeButton.addEventListener('click', function () {
+  while (completedTasks[0]) {
+    itemList.removeChild(completedTasks[0]);
+  }
+  console.log(itemList.children.length);
+  let tempList = [];
+  for (let index = 0; index < itemList.children.length; index += 1) {
+    let itemKey = new Object();
+    itemKey.text = itemList.children[index].innerText;
+    itemKey.isConcluded = false;
+
+    tempList.push(itemKey);
+  }
+  savedItems = tempList;
+  localStorage.savedItems = JSON.stringify(savedItems);
+});
 
 // Clear All
 
@@ -55,5 +101,7 @@ clearButton.addEventListener('click', function () {
   while (itemList.firstChild) {
     itemList.removeChild(itemList.firstChild);
     localStorage.savedItems = '[]';
+    savedItems = JSON.parse(localStorage.savedItems);
+    console.log('List is Empty');
   }
 });
