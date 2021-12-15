@@ -75,7 +75,7 @@ footer h4 {
   color: var(--background-color-defaulf-secundary);
 }
 
-#tema {
-  background: var(--background-color-default-primary);
+#salvar-tarefas {
+  background: rgb(0 , 98 , 255);
   color: var(--background-color-defaulf-secundary);
 }

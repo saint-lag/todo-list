@@ -2,51 +2,65 @@ const createButton = document.getElementById('criar-tarefa');
 const itemList = document.getElementById('lista-tarefas');
 const item = document.createElement('li');
 
-// Session Initiated: Whether browser has visit before
-// Saved Items: Variable that receives Saved Local Storage Items
+// Welcome!
 
-if (
-  localStorage.sessionInitiated === 'true' &&
-  localStorage.savedItems !== 'undefined'
-) {
-  console.log('Session: TRUE');
-  var savedItems = JSON.parse(localStorage.savedItems);
-  console.log(savedItems);
+if (localStorage.length === 0) {
+  console.log('Session Initiated!');
+  localStorage.setItem('sessionInitiated', JSON.stringify(true));
+  localStorage.setItem('savedItems', JSON.stringify([]));
+  var savedItems = [];
+} else {
+  console.log('Welcome, back!');
+  savedItems = JSON.parse(localStorage.savedItems);
+
+  for (let index = 0; index < itemList.children.length; index += 1) {
+    itemList.removeChild(firstChild);
+  }
+
   for (let savedItem of savedItems) {
     item.style.listStyle = 'none';
     item.style.lineHeight = '20px';
     item.className = 'item';
     item.innerText = savedItem.text;
     itemList.appendChild(item.cloneNode(true));
-    console.log('Saved Item: ' + itemList);
-    var items = document.querySelectorAll('.item');
   }
-} else {
-  console.log('Session: FALSE');
-  localStorage.setItem('sessionInitiated', JSON.stringify(true));
-  localStorage.setItem('savedItems', JSON.stringify([]));
-  var savedItems = [];
 }
+
+// Saving Feature
+
+const saveButton = document.getElementById('salvar-tarefas');
+saveButton.addEventListener('click', function () {
+  if (savedItems.length > 0) {
+    localStorage.savedItems = JSON.stringify(savedItems);
+    console.log('Saved Items: ' + savedItems);
+  }
+});
 
 // Create Button: Creates Elements of List
 
 createButton.addEventListener('click', function () {
-  item.style.listStyle = 'none';
-  item.style.lineHeight = '20px';
-  item.className = 'item';
-  item.innerText = document.getElementById('texto-tarefa').value;
-  itemList.appendChild(item.cloneNode(true));
+  if (document.getElementById('texto-tarefa').value !== '') {
+    // Creates List Item
+    item.style.listStyle = 'none';
+    item.style.lineHeight = '20px';
+    item.className = 'item';
+    item.innerText = document.getElementById('texto-tarefa').value;
+    itemList.appendChild(item.cloneNode(true));
 
-  items = document.querySelectorAll('.item');
+    // Reassigns Value to Items
+    let items = document.querySelectorAll('.item');
 
-  // Saving Items to LocalStorage --- OBJECT
-  let itemKey = new Object();
-  itemKey.text = item.innerHTML;
-  itemKey.isConcluded = false;
+    // Creates Object
+    let itemKey = new Object();
+    itemKey.text = item.innerHTML;
+    itemKey.isConcluded = false;
 
-  savedItems.push(itemKey);
-  localStorage.savedItems = JSON.stringify(savedItems);
-  console.log('Saved Items: ' + savedItems);
+    // Saving Items to LocalStorage
+    savedItems.push(itemKey);
+
+    // Clear input value
+    document.querySelector('#texto-tarefa').value = '';
+  }
 });
 
 // Completed Tasks
@@ -90,7 +104,6 @@ removeButton.addEventListener('click', function () {
     tempList.push(itemKey);
   }
   savedItems = tempList;
-  localStorage.savedItems = JSON.stringify(savedItems);
 });
 
 // Clear All
@@ -101,7 +114,8 @@ clearButton.addEventListener('click', function () {
   while (itemList.firstChild) {
     itemList.removeChild(itemList.firstChild);
     localStorage.savedItems = '[]';
-    savedItems = JSON.parse(localStorage.savedItems);
     console.log('List is Empty');
   }
 });
+
+// Saving List Feature
