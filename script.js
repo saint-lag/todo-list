@@ -1,13 +1,15 @@
 const createButton = document.getElementById('criar-tarefa');
 const itemList = document.getElementById('lista-tarefas');
 const item = document.createElement('li');
+sessionStorage.setItem('selected', 'false');
 
 // Welcome!
 
-if (localStorage.sessionInitiated === 'undefined') {
+if (typeof localStorage.sessionInitiated === 'undefined') {
   console.log('Session Initiated!');
   localStorage.setItem('sessionInitiated', JSON.stringify(true));
   localStorage.setItem('savedItems', JSON.stringify([]));
+  var items = document.querySelectorAll('.item');
   var savedItems = [];
 } else {
   console.log('Welcome, back!');
@@ -23,6 +25,9 @@ if (localStorage.sessionInitiated === 'undefined') {
     item.className = 'item';
     item.innerText = savedItem.text;
     itemList.appendChild(item.cloneNode(true));
+    var items = document.querySelectorAll('.item');
+    taskManager();
+    selectItem();
   }
 }
 
@@ -31,7 +36,12 @@ if (localStorage.sessionInitiated === 'undefined') {
 const saveButton = document.getElementById('salvar-tarefas');
 saveButton.addEventListener('click', function () {
   localStorage.savedItems = JSON.stringify(savedItems);
-  console.log('Saved Items: ' + savedItems);
+  items = document.querySelectorAll('.item');
+  if (savedItems.length === 0) {
+    console.log('Empty list saved...');
+  } else {
+    console.log('Saved Items: ' + savedItems);
+  }
 });
 
 // Create Button: Creates Elements of List
@@ -46,7 +56,7 @@ createButton.addEventListener('click', function () {
     itemList.appendChild(item.cloneNode(true));
 
     // Reassigns Value to Items
-    let items = document.querySelectorAll('.item');
+    items = document.querySelectorAll('.item');
 
     // Creates Object
     let itemKey = new Object();
@@ -58,29 +68,74 @@ createButton.addEventListener('click', function () {
 
     // Clear input value
     document.querySelector('#texto-tarefa').value = '';
+
+    // Creates addEventListener and Selected Item function
+    taskManager();
+    selectItem();
   }
 });
 
-// Completed Tasks
+// Completed Tasks - Not Working - Required
 
-let isConcluded = false;
+function taskManager() {
+  let isConcluded = false;
+  var items = document.querySelectorAll('.item');
 
-if (document.querySelectorAll('.item') != 'undefined') {
-  document.querySelectorAll('.item').forEach((item) => {
-    item.addEventListener('dblclick', function (event) {
-      if (isConcluded === false) {
-        isConcluded = true;
-        console.log(isConcluded);
-        event.target.className += ' completed';
-        event.target.style.textDecoration = 'line-through';
-      } else {
-        isConcluded = false;
-        console.log(isConcluded);
-        event.target.style.textDecoration = 'none';
-        event.target.classList.remove('completed');
-      }
+  if (document.querySelectorAll('.item') !== 'undefined') {
+    items.forEach((item) => {
+      item.addEventListener('dblclick', function (event) {
+        if (isConcluded === false) {
+          isConcluded = true;
+          console.log(isConcluded);
+          event.target.className += ' completed';
+
+          indexOfItem = Array.prototype.indexOf.call(
+            itemList.children,
+            event.target
+          );
+          savedItems[indexOfItem].isConcluded = true;
+        } else {
+          isConcluded = false;
+          console.log(isConcluded);
+          event.target.classList.remove('completed');
+
+          indexOfItem = Array.prototype.indexOf.call(
+            itemList.children,
+            event.target
+          );
+          savedItems[indexOfItem].isConcluded = false;
+        }
+      });
     });
-  });
+  }
+}
+
+// Selected List Item - Not Working
+
+function selectItem() {
+  let isSelected = false;
+  var selectLimitExceeded = JSON.parse(sessionStorage.getItem('selected'));
+  var items = document.querySelectorAll('.item');
+
+  if (items !== 'undefined') {
+    items.forEach((item) => {
+      item.addEventListener('click', function (event) {
+        if (isSelected === false && selectLimitExceeded === false) {
+          event.target.className += ' selected';
+
+          sessionStorage.selected = 'true';
+          isSelected = true;
+        } else if (isSelected === false && selectLimitExceeded === true) {
+          console.log('Selected Limit is exceeded...');
+        } else if (isSelected === true) {
+          event.target.classList.remove('selected');
+
+          sessionStorage.selected = 'false';
+          isSelected = false;
+        }
+      });
+    });
+  }
 }
 
 // Remove Concluded Tasks
@@ -111,9 +166,7 @@ const clearButton = document.getElementById('apaga-tudo');
 clearButton.addEventListener('click', function () {
   while (itemList.firstChild) {
     itemList.removeChild(itemList.firstChild);
-    localStorage.savedItems = '[]';
+    savedItems = [];
     console.log('List is Empty');
   }
 });
-
-// Saving List Feature

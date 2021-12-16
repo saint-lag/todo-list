@@ -17,7 +17,7 @@
 body {
   position: absolute;
   width: 100%;
-  margin-top: 25%;
+  margin-top: 18%;
   background-color: var(--background-color-default-primary);
   text-align: center;
   justify-content: center;
@@ -35,6 +35,7 @@ header {
 
 main {
   display: inline-block;
+  justify-content: center;
   width: var(--main-box-width);
   padding-top: 2vh;
   padding-bottom: 2vh;
@@ -55,6 +56,27 @@ footer h4 {
   padding: 4vh;
 }
 
+
+.item {
+  padding: 0.25vh;
+  position: column;
+
+}
+
+.completed {
+  text-decoration: line-through solid rgb(0 , 0 , 0);
+}
+
+.selected {
+  background-color: rgb(128 , 128 , 128);
+}
+
+#lista-tarefas {
+  width: 50%;
+  position: center;
+  display: inline-block;
+}
+
 #texto-tarefa {
   text-align: center;
   width: 150px;
@@ -62,6 +84,11 @@ footer h4 {
 
 #criar-tarefa {
   background: green;
+  color: var(--background-color-defaulf-secundary);
+}
+
+#salvar-tarefas {
+  background: rgb(0 , 98 , 255);
   color: var(--background-color-defaulf-secundary);
 }
 
@@ -75,7 +102,13 @@ footer h4 {
   color: var(--background-color-defaulf-secundary);
 }
 
-#salvar-tarefas {
-  background: rgb(0 , 98 , 255);
+#apaga-item {
+  background: red;
   color: var(--background-color-defaulf-secundary);
+}
+
+#lista-tarefas {
+  padding-top: 4vh;
+  display: block;
+  margin: auto;
 }
